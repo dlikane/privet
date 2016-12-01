@@ -1,8 +1,9 @@
 /* eslint-disable global-require */
 const express = require('express');
 const logger = require('../logger');
+const stringify = require('../utils/stringify');
 
-const dao =  require('./api/dao');
+const dao =  require('../api/dao');
 
 module.exports = (app, options) => {
   logger.info('register apiMiddleware:');
@@ -11,8 +12,9 @@ module.exports = (app, options) => {
   var db = dao(options.databaseUrl);
 
   app.use('/api', function (req, res) {
-    logger.info('Request Type:' + JSON.stringify(req));
-    res.json({ message: 'welcome to our api!' });
+    logger.info('Request Type:' + stringify.stringify(req));
+    json = JSON.parse(stringify.stringify(req));
+    res.json({ message: 'welcome to our api!', req: json });
   });
 
   return app;
