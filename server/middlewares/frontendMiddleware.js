@@ -30,6 +30,11 @@ const addDevMiddlewares = (app, webpackConfig) => {
       res.sendFile(path.join(process.cwd(), pkg.dllPlugin.path, filename));
     });
   }
+/*
+  app.get(/^\/api/, (req, res) => {
+    res.json({ message: 'welcome to our api!' });
+  });
+*/
 
   app.get('*', (req, res) => {
     fs.readFile(path.join(compiler.outputPath, 'index.html'), (err, file) => {
