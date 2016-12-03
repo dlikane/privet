@@ -7,6 +7,8 @@ import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
+import testPageReducer from 'containers/TestPage/reducer';
+import editPostReducer from 'containers/EditPost/reducer';
 
 /*
  * routeReducer
@@ -43,6 +45,8 @@ export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
+    // testPage: testPageReducer, -- injected in routers
+    // editPost: editPostReducer,
     ...asyncReducers,
   });
 }

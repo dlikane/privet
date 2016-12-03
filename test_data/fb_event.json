@@ -1,0 +1,25 @@
+{
+  "description": "Клуб бардовской песни \"Южный крест\" приглашает на вечер “Крылья на Минуту\" дуэта Ланы Джанджгава и Михаила Фролова. Стихи читает Яков Маргулис.\nВечер состоится  Glen Eira Town Hall, corner Glen Eira & Hawthorn Roads, Caulfield\nВход: $20 ($15 concession)\n\nБилеты можно приобрести online: https://www.trybooking.com/ 234305\nили перед началом концерта.\n\nСправки по телефону 0411 885 045",
+  "is_date_only": false,
+  "location": "Glen Eira Town Hall",
+  "name": "“Крылья на Минуту”",
+  "owner": {
+    "name": "Lana Djandjgava",
+    "id": "1659775030918462"
+  },
+  "privacy": "SECRET",
+  "start_time": "2016-11-13T18:00:00+1100",
+  "timezone": "Australia/Melbourne",
+  "updated_time": "2016-10-19T11:20:11+0000",
+  "venue": {
+    "city": "Melbourne",
+    "country": "Australia",
+    "latitude": -37.8802,
+    "longitude": 145.023,
+    "state": "VIC",
+    "street": "Hawthorn Rd",
+    "zip": "3162",
+    "id": "113085455368305"
+  },
+  "id": "535468143313636"
+}

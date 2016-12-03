@@ -24,22 +24,32 @@ frontendMiddleware(app, {
 // get the intended port number, use port 3000 if not provided
 const port = argv.port || process.env.PORT || 3000;
 
-// Start your app.
-app.listen(port, (err) => {
-  if (err) {
-    return logger.error(err.message);
-  }
+const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+var url = "mongodb://127.0.0.1:27017"; // "vps105169.vps.ovh.ca:27017/test";
+mongoose.connect(url);
+var db = mongoose.connection;
+db.on('error', (err) => {
+  logger.err(err, "Connection failed");
+});
+db.once('open', () => {
+  // Start your app.
+  app.listen(port, (err) => {
+    if (err) {
+      return logger.err(err.message);
+    }
 
-  // Connect to ngrok in dev mode
-  if (ngrok) {
-    ngrok.connect(port, (innerErr, url) => {
-      if (innerErr) {
-        return logger.error(innerErr);
-      }
+    // Connect to ngrok in dev mode
+    if (ngrok) {
+      ngrok.connect(port, (innerErr, url) => {
+        if (innerErr) {
+          return logger.err(innerErr);
+        }
 
-      logger.appStarted(port, url);
-    });
-  } else {
-    logger.appStarted(port);
-  }
+        logger.appStarted(port, url);
+      });
+    } else {
+      logger.appStarted(port);
+    }
+  });
 });

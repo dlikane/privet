@@ -1,4 +1,8 @@
 {
   "app.components.HomePage.header": "Домашняя страничка",
-  "app.components.NotFoundPage.header": "Упс, страничка не найдена..."
+  "app.components.NotFoundPage.header": "Упс, страничка не найдена...",
+  "app.components.HomePage.youtubeId": "youtube ID",
+  "app.containers.EditPost.header": "Редактируем пост",
+
+  "eof": "eof"
 }

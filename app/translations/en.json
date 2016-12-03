@@ -1,4 +1,8 @@
 {
-  "app.components.HomePage.header": "Home page please",
-  "app.components.NotFoundPage.header": ""
+  "app.components.NotFoundPage.header": "Oops, not found",
+  "app.components.HomePage.header": "This is HomePage components !",
+  "app.components.HomePage.youtubeId": "youtube ID",
+  "app.containers.EditPost.header": "This is EDIT POST page",
+
+  "eof": "eof"
 }

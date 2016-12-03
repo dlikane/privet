@@ -2,9 +2,8 @@ const resolve = require('path').resolve;
 const pullAll = require('lodash/pullAll');
 const uniq = require('lodash/uniq');
 
-const ReactBoilerplate = {
-  // This refers to the react-boilerplate version this project is based on.
-  version: '3.3.3',
+const RbPrivet = {
+  version: '0.0.1',
 
   /**
    * The DLL Plugin provides a dramatic speed increase to webpack build and hot module reloading
@@ -37,13 +36,13 @@ const ReactBoilerplate = {
       include: ['core-js', 'eventsource-polyfill', 'babel-polyfill', 'lodash'],
 
       // The path where the DLL manifest and bundle will get built
-      path: resolve('../node_modules/react-boilerplate-dlls'),
+      path: resolve('../node_modules/rb-privet-dlls'),
     },
 
     entry(pkg) {
       const dependencyNames = Object.keys(pkg.dependencies);
-      const exclude = pkg.dllPlugin.exclude || ReactBoilerplate.dllPlugin.defaults.exclude;
-      const include = pkg.dllPlugin.include || ReactBoilerplate.dllPlugin.defaults.include;
+      const exclude = pkg.dllPlugin.exclude || RbPrivet.dllPlugin.defaults.exclude;
+      const include = pkg.dllPlugin.include || RbPrivet.dllPlugin.defaults.include;
       const includeDependencies = uniq(dependencyNames.concat(include));
 
       return {
@@ -53,4 +52,4 @@ const ReactBoilerplate = {
   },
 };
 
-module.exports = ReactBoilerplate;
+module.exports = RbPrivet;
