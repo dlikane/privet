@@ -198,6 +198,7 @@
     "minimist": "1.2.0",
     "mongoose": "4.7.1",
     "react": "15.3.2",
+    "react-bootstrap": "^0.30.7",
     "react-dom": "15.3.2",
     "react-helmet": "3.1.0",
     "react-intl": "2.1.5",
