@@ -9,7 +9,8 @@ import { LOAD_POST } from './constants';
 import { postLoaded, postLoadingError } from './actions';
 
 import request from 'utils/request';
-import { selectPost, selectOriginId } from './selectors';
+import { selectOriginId } from './selectors';
+import { mapFacebookEventToPost } from '../../mapping/facebookMapping';
 
 /**
  * Github repos request/response handler
@@ -17,11 +18,12 @@ import { selectPost, selectOriginId } from './selectors';
 export function* getPost() {
   // Select username from store
   const originId = yield select(selectOriginId());
+  console.log("Origin ID: " + originId);
   const requestURL = `https://graph.facebook.com/${originId}?access_token=1126898087427042|6c75ae6050aea3f5ed7ec56365faa649`;
   try {
     // Call our request helper (see 'utils/request')
-    const post = yield call(request, requestURL);
-    yield put(postLoaded(post));
+    const event = yield call(request, requestURL);
+    yield put(postLoaded(mapFacebookEventToPost(event)));
   } catch (err) {
     yield put(postLoadingError(err));
   }

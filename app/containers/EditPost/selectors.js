@@ -5,6 +5,11 @@ import { createSelector } from 'reselect';
  */
 const selectEditPost = () => (state) => state.get('editPost');
 
+const selectPost = () => createSelector(
+  selectEditPost(),
+  (globalState) => globalState.get('post')
+);
+
 const selectOriginId = () => createSelector(
   selectEditPost(),
   (editPost) => editPost.get('originId')
@@ -26,17 +31,12 @@ const selectError = () => createSelector(
   (editPost) => editPost.get('error')
 );
 
-const selectPost = () => createSelector(
-  selectEditPost(),
-  (editPost) => editPost.get('post')
-);
-
 
 export default selectEditPost;
 export {
+  selectPost,
   selectOriginId,
   selectOriginKind,
   selectLoading,
   selectError,
-  selectPost,
 };

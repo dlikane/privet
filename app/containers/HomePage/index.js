@@ -17,6 +17,7 @@ export class HomePage extends React.PureComponent {
   render() {
     return (
       <div>
+        {console.log("props" + JSON.stringify(this.props))}
         <h1>
           <FormattedMessage {...messages.header}/>
         </h1>

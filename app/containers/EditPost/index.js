@@ -6,13 +6,15 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectOriginId, selectOriginKind, selectPost } from './selectors';
+import { selectOriginId, selectOriginKind } from './selectors';
+import { selectPost } from './selectors';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import { createStructuredSelector } from 'reselect';
 import { loadPost } from './actions';
 import Form from "./Form";
 import Input from "./Input";
+import PostItem from "../PostItem";
 
 export class EditPost extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -24,14 +26,13 @@ export class EditPost extends React.PureComponent { // eslint-disable-line react
 
   render() {
     let mainContent = (
-      <div>
-        <h3>post</h3>
-        <pre>{JSON.stringify(this.props.post)}</pre>
-      </div>
+      <div/>
     );
+    // <PostItem post="{this.props.post}" />
 
     return (
       <div>
+        {console.log("props" + JSON.stringify(this.props))}
         <FormattedMessage {...messages.header} />
 
         <Form onSubmit={this.props.onSubmitForm}>
