@@ -1,8 +1,6 @@
-const { StatusEnum, OriginEnum } = require('../app/model/enums.js');
-
 const mongoose = require('mongoose');
 const logger = require('../server/logger');
-var Post = require('../server/model/post');
+var Post = require('../server/api/model/post');
 
 logger.info('starting...');
 
@@ -25,8 +23,8 @@ db.once('open', () => {
 
 function runSample() {
   var post = new Post({
-    kind: OriginEnum.FACEBOOK_POST,
-    status: StatusEnum.POSTED,
+    originKind: 'sampleKind',
+    status: 'posted',
     description: {locale: "en", text: "test post"},
   });
 
@@ -42,9 +40,9 @@ function runSample() {
 
 function runFind() {
   logger.info("running find...");
-  return Post.find()
-    .then(posts=> {
-      logger.info(posts);
+  return Post.find().lean().exec()
+    .then(posts => {
+      logger.info(JSON.stringify(posts));
     })
     .catch(err => {
         logger.err(err);

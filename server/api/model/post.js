@@ -2,17 +2,18 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var postSchema = new Schema({
-  lead_id: String,
+  leadId: String,
   status: { type: String, required: true },
-  origin_kind: { type: String, required: true },
-  origin_id: String,
-  origin_locale: String,
+  originKind: { type: String, required: true },
+  originId: String,
+  originLocale: String,
+  originImg: String,
   description: [ {
     locale: String,
     text: String
   }],
-  start_time: Date,
-  posted_time: Date,
+  startTime: Date,
+  postedTime: Date,
   duration: String,
   location: String,
   parties: [ { type: String }],

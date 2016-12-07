@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var partySchema = new Schema({
-  party_kind: { type: String, required: true },
-  origin_kind: { type: String, required: true },
-  origin_id: String,
+  partyKind: { type: String, required: true },
+  originKind: { type: String, required: true },
+  originId: String,
   status: { type: String, required: true },
-  thumb_url: String,
+  thumbUrl: String,
   contact: {
     personName: String,
     address: String,

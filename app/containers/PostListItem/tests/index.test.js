@@ -25,10 +25,10 @@ describe('<RepoListItem />', () => {
       owner: {
         login: 'mxstbr',
       },
-      html_url: 'https://github.com/mxstbr/react-boilerplate',
-      name: 'react-boilerplate',
-      open_issues_count: 20,
-      full_name: 'mxstbr/react-boilerplate',
+      html_url: 'https://github.com/dlikane/privet',
+      name: 'privet',
+      open_issues_count: 0,
+      full_name: 'dlikane/privet',
     };
   });
 

@@ -19,6 +19,7 @@ var posts = {
       "status": "published",
       "origin_id": "535468143313636",
       "origin_local": "ru",
+      "origin_img": "",
       "description": [
         {
           "locale": "ru",
@@ -43,6 +44,7 @@ var posts = {
       "status": "published",
       "origin_id": "",
       "origin_local": "ru",
+      "origin_img": "",
       "description": [
         {
           "locale": "",

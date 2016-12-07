@@ -46,7 +46,7 @@ const RbPrivet = {
       const includeDependencies = uniq(dependencyNames.concat(include));
 
       return {
-        reactBoilerplateDeps: pullAll(includeDependencies, exclude),
+        privetMelbourneDeps: pullAll(includeDependencies, exclude),
       };
     },
   },

@@ -1,8 +1,7 @@
 /**
  * app.js
  *
- * This is the entry file for the application, only setup and boilerplate
- * code.
+ * This is the entry file for the application
  */
 import 'babel-polyfill';
 
@@ -27,6 +26,8 @@ import { translationMessages } from './i18n';
 
 // Import the CSS reset, which HtmlWebpackPlugin transfers to the build folder
 import 'sanitize.css/sanitize.css';
+
+require("css!./css/bootstrap.css");
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router

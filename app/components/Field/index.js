@@ -1,14 +1,18 @@
 /*...*/
+import React, { PropTypes } from 'react';
 
-class Field extends React.Component { // eslint-disable-line react/prefer-stateless-function
-  render() {
-    return (
-      <div>
-        <div>{prop.name}</div>
-        <div>{prop.value}</div>
-      </div>
-    );
-  }
+function Field(props) {
+  return (
+    <div>
+      <div>{props.name}</div>
+      <div>{props.value}</div>
+    </div>
+  );
 }
+
+Field.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string,
+};
 
 export default Field;
