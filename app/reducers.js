@@ -7,8 +7,7 @@ import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-import testPageReducer from 'containers/TestPage/reducer';
-import editPostReducer from 'containers/EditPost/reducer';
+import { createForms, combineForms } from 'react-redux-form/immutable';
 
 /*
  * routeReducer
@@ -38,15 +37,23 @@ function routeReducer(state = routeInitialState, action) {
   }
 }
 
+const initialUser = fromJS({
+  name: 'hey there',
+  email: '',
+});
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
 export default function createReducer(asyncReducers) {
   return combineReducers({
+    // deep: combineForms({
+    //   user: initialUser,
+    // }, 'deep'),
+    ...createForms({
+      user: initialUser,
+    }),
     route: routeReducer,
     language: languageProviderReducer,
-    // testPage: testPageReducer, -- injected in routers
-    // editPost: editPostReducer,
     ...asyncReducers,
   });
 }

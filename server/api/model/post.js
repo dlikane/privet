@@ -8,10 +8,8 @@ var postSchema = new Schema({
   originId: String,
   originLocale: String,
   originImg: String,
-  description: [ {
-    locale: String,
-    text: String
-  }],
+  en_description: String,
+  ru_description: String,
   startTime: Date,
   postedTime: Date,
   duration: String,

@@ -14,14 +14,10 @@ var partySchema = new Schema({
     email: String,
     url: String
   },
-  name: [ {
-    locale: String,
-    text: String
-  }],
-  description: [ {
-    locale: String,
-    text: String
-  }],
+  en_name: String,
+  ru_name: String,
+  en_description: String,
+  ru_description: String,
   tags: [ { type: String }]
 });
 

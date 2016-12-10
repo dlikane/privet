@@ -2,8 +2,12 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var tagSchema = new Schema({
-  tag: [ {
-    locale: String,
+  en_tag: String,
+  ru_tag: String,
+  en_alt_tags: [{
+    text: String
+  }],
+  ru_alt_tags: [{
     text: String
   }],
 });

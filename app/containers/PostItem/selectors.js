@@ -7,7 +7,7 @@ const selectEditPost = () => (state) => state.get('editPost');
 
 const selectPost = () => createSelector(
   selectEditPost(),
-  (globalState) => globalState.get('post')
+  (editState) => editState.get('post')
 );
 
 export default selectEditPost;

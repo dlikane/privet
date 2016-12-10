@@ -1,52 +1,47 @@
-/*
- *
- * TestPage
- *
- */
-
+/*...*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { createSelector } from 'reselect';
-import selectTestPage from './selectors';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-import Input from './Input';
-import { SplitButton, MenuItem } from 'react-bootstrap';
+import { Field, Form, Control } from 'react-redux-form/immutable';
+import { createSelector, createStructuredSelector } from 'reselect';
 
-export class TestPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class TestPage extends React.Component {
+  handleSubmit(val) {
+    // Do anything you want with the form value
+    console.log("val: " + JSON.stringify(val));
+  }
 
   render() {
+    let { user } = this.props;
+    console.log("render.user: " + JSON.stringify(user));
+    console.log("user.name: " + user.get('name'));
+
     return (
-      <div>
-        <FormattedMessage {...messages.header} />
-        <SplitButton title="Dropdown right" pullRight id="split-button-pull-right">
-          <MenuItem eventKey="1">Action</MenuItem>
-          <MenuItem eventKey="2">Another action</MenuItem>
-          <MenuItem eventKey="3">Something else here</MenuItem>
-          <MenuItem divider />
-          <MenuItem eventKey="4">Separated link</MenuItem>
-        </SplitButton>
-        <Input
-          id="originKind"
-          type="text"
-          placeholder="facebook#post"
-          value={this.props.orinigKind}
-          onChange={this.props.onChangeOringKind}
-        />
-      </div>
+      <Form model="user" onSubmit={(val) => this.handleSubmit(val)}>
+        <h1>Hello, {user.get('name')}!</h1>
+        <Field model=".name">
+          <input type="text" />
+        </Field>
+        <Field model=".email">
+          <input type="text" />
+        </Field>
+        <Control.button
+          model="user"
+          disabled={{ valid: false }}
+        >Submit</Control.button>
+      </Form>
     );
   }
 }
 
-const mapStateToProps = createSelector(
-  selectTestPage(),
-  (originId) => ({originId}),
+const selectUserState = () => (state) => state.get('user');
+
+const selectUser = () => createSelector(
+  selectUserState(),
+  (user) => user
 );
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapStateToProps = createStructuredSelector({
+  user: selectUser(),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(TestPage);
+export default connect(mapStateToProps)(TestPage);

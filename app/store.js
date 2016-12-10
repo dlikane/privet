@@ -30,8 +30,8 @@ export default function configureStore(initialState = {}, history) {
     typeof window === 'object' &&
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
-  /* eslint-enable */
 
+  /* eslint-enable */
   const store = createStore(
     createReducer(),
     fromJS(initialState),

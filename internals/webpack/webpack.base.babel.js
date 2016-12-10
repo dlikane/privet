@@ -15,7 +15,7 @@ module.exports = (options) => ({
     loaders: [{
       test: /\.js$/, // Transform all .js files required somewhere with Babel
       loader: 'babel',
-      exclude: /node_modules/,
+      exclude: /node_modules|samples/,
       query: options.babelQuery,
     }, {
       // Do not transform vendor's CSS with CSS-modules
@@ -24,7 +24,7 @@ module.exports = (options) => ({
       // they will be a part of our compilation either way.
       // So, no need for ExtractTextPlugin here.
       test: /\.css$/,
-      include: /node_modules/,
+      // include: /node_modules/,
       loaders: ['style-loader', 'css-loader'],
     }, {
       test: /\.(eot|svg|ttf|woff|woff2)$/,

@@ -9,15 +9,8 @@ export function mapFacebookEventToPost(event) {
     originId: event.id,
     originLocale: 'en',
     originImg: event.cover.source,
-    description: [ {
-      locale: 'en',
-      text: event.description,
-    },
-      {
-        locale: 'ru',
-        text: event.description,
-      },
-    ],
+    en_description: event.description,
+    ru_description: event.description,
     startTime: event.start_time,
     postedTime: Date,
     duration: 0,
