@@ -1,28 +1,14 @@
 /*...*/
-
-import { fromJS } from 'immutable';
+import { combineReducers } from 'redux-immutable';
+import { createForms } from 'react-redux-form/immutable';
 import {
-  CHANGE_ORIGIN_ID,
-  CHANGE_ORIGIN_KIND,
   LOAD_POST,
   LOAD_POST_SUCCESS,
   LOAD_POST_ERROR,
 } from './constants';
-import {OriginKindEnum} from "../../model/enums";
 
-const initialState = fromJS({
-  originId: '1601001553537687',
-  originKind: OriginKindEnum.FACEBOOK_EVENT,
-});
-
-function editPostReducer(state = initialState, action) {
+function editPostReducer(state = {}, action) {
   switch (action.type) {
-    case CHANGE_ORIGIN_ID:
-      console.log('reducer: change_oringin_id: ' + action.oridingId);
-      return state.set('originId', action.oridingId);
-    case CHANGE_ORIGIN_KIND:
-      console.log('reducer: change_oringin_kind: ' + action.originKind);
-      return state.set('originKind', action.oridingKind);
     case LOAD_POST:
       console.log('load_post');
       return state

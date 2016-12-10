@@ -1,42 +1,24 @@
 import { createSelector } from 'reselect';
 
-/**
- * Direct selector to the editPost state domain
- */
-const selectEditPost = () => (state) => state.get('editPost');
+const selectPostEditorState = () => (state) => state.get('postEditor');
 
-const selectPost = () => createSelector(
-  selectEditPost(),
-  (globalState) => globalState.get('post')
+const selectPostEditor = () => createSelector(
+  selectPostEditorState(),
+  (postEditor) => postEditor
 );
 
 const selectOriginId = () => createSelector(
-  selectEditPost(),
-  (editPost) => { console.log('selecting originId: ' + editPost.get('originId')); return editPost.get('originId'); }
+  selectPostEditorState(),
+  (postEditor) => postEditor.get('originId')
 );
-
 const selectOriginKind = () => createSelector(
-  selectEditPost(),
-  (editPost) => editPost.get('originKind')
+  selectPostEditorState(),
+  (postEditor) => postEditor.get('originKind')
 );
 
-
-const selectLoading = () => createSelector(
-  selectEditPost(),
-  (editPost) => globalState.get('loading')
-);
-
-const selectError = () => createSelector(
-  selectEditPost(),
-  (editPost) => editPost.get('error')
-);
-
-
-export default selectEditPost;
+export default selectPostEditorState;
 export {
-  selectPost,
+  selectPostEditor,
   selectOriginId,
   selectOriginKind,
-  selectLoading,
-  selectError,
 };

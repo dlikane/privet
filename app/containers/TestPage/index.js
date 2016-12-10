@@ -33,15 +33,16 @@ class TestPage extends React.Component {
   }
 }
 
+const mapStateToProps = createStructuredSelector({
+  user: selectUser(),
+});
+
+export default connect(mapStateToProps)(TestPage);
+
+// selectors
 const selectUserState = () => (state) => state.get('user');
 
 const selectUser = () => createSelector(
   selectUserState(),
   (user) => user
 );
-
-const mapStateToProps = createStructuredSelector({
-  user: selectUser(),
-});
-
-export default connect(mapStateToProps)(TestPage);

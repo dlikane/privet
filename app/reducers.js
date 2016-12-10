@@ -7,7 +7,7 @@ import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-import { createForms, combineForms } from 'react-redux-form/immutable';
+import { createForms } from 'react-redux-form/immutable';
 
 /*
  * routeReducer
@@ -41,16 +41,20 @@ const initialUser = fromJS({
   name: 'hey there',
   email: '',
 });
+
+const initialPostEditor = fromJS({
+  originId: '1601001553537687',
+  originKind: 'facebook#event',
+});
+
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
 export default function createReducer(asyncReducers) {
   return combineReducers({
-    // deep: combineForms({
-    //   user: initialUser,
-    // }, 'deep'),
     ...createForms({
       user: initialUser,
+      postEditor: initialPostEditor,
     }),
     route: routeReducer,
     language: languageProviderReducer,
