@@ -1,21 +1,13 @@
-import {createSelector, createStructuredSelector} from 'reselect';
+import {createSelector} from 'reselect';
 
-/**
- * Direct selector to the editPost state domain
- */
-export const selectEditPost = () => (state) => state.get('editPost');
+const selectPostState = () => (state) => state.get('post');
 
-export const selectPost = () => createSelector(
-  selectEditPost(),
-  (editPost) => editPost.get('post')
+const selectPost = () => createSelector(
+  selectPostState(),
+  (post) => post
 );
 
-export const selectEnDescription = () => createSelector(
-  selectPost(),
-  (post) => post.en_description
-);
-
-export const mapStateToProps = createStructuredSelector({
-  post: selectPost(),
-  en_description: selectEnDescription(),
-});
+export default selectPostState;
+export {
+  selectPost,
+}

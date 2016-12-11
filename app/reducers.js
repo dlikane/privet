@@ -47,6 +47,10 @@ const initialPostEditor = fromJS({
   originKind: 'facebook#event',
 });
 
+const initialPost = fromJS({
+  en_description: 'test description'
+});
+
 /**
  * Creates the main reducer with the asynchronously loaded ones
  */
@@ -55,6 +59,7 @@ export default function createReducer(asyncReducers) {
     ...createForms({
       user: initialUser,
       postEditor: initialPostEditor,
+      post: initialPost,
     }),
     route: routeReducer,
     language: languageProviderReducer,

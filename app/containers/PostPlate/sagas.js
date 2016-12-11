@@ -6,7 +6,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { LOAD_POST } from './constants';
 import { postLoaded, postLoadingError } from './actions';
 import request from 'utils/request';
-import { selectOriginId, selectOriginKind } from './selectors';
+import { selectOriginId, selectOriginKind } from '../PostEditor/selectors';
 import { buildUrl, buildPost } from '../../mapping/mapping';
 import { getPostFromDbByOriginId } from '../../clientapi/posts';
 

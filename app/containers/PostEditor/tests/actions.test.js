@@ -1,10 +1,10 @@
 import expect from 'expect';
 import {
   defaultAction,
-} from '../actions';
+} from '../../PostPlate/actions';
 import {
   DEFAULT_ACTION,
-} from '../constants';
+} from '../../PostPlate/constants';
 
 describe('PostEditor actions', () => {
   describe('Default Action', () => {

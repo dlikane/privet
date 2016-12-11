@@ -1,5 +1,6 @@
 /*...*/
 import { combineReducers } from 'redux-immutable';
+import { fromJS } from 'immutable';
 import { createForms } from 'react-redux-form/immutable';
 import {
   LOAD_POST,
@@ -7,7 +8,7 @@ import {
   LOAD_POST_ERROR,
 } from './constants';
 
-function editPostReducer(state = {}, action) {
+function editPostReducer(state = fromJS({}), action) {
   switch (action.type) {
     case LOAD_POST:
       console.log('load_post');
@@ -16,7 +17,8 @@ function editPostReducer(state = {}, action) {
         .set('error', false)
         .set('post', false);
     case LOAD_POST_SUCCESS:
-      console.log('reducer: load_post_success');
+      console.log('reducer: state: ' + JSON.stringify(state));
+      console.log('reducer: load_post_success: post: ' + JSON.stringify(action.post));
       return state
         .set('post', action.post)
         .set('loading', false);

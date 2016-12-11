@@ -1,5 +1,5 @@
 import expect from 'expect';
-import editPostReducer from '../reducer';
+import editPostReducer from '../../PostPlate/reducer';
 import { fromJS } from 'immutable';
 
 describe('editPostReducer', () => {
