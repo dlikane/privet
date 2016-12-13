@@ -8,7 +8,7 @@ function filter(item) {
       return '[Circular]';
 
     if(i >= 29) // seems to be a harded maximum of 30 serialized objects?
-      return '[Unknown]';
+      return '[Unknown (' + i + ')]';
 
     ++i; // so we know we aren't using the original object anymore
 

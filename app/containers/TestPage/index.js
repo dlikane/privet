@@ -1,10 +1,17 @@
 /*...*/
 import React from 'react';
 import { connect } from 'react-redux';
-import { Field, Form, Control } from 'react-redux-form/immutable';
+import { Form, Control } from 'react-redux-form/immutable';
 import { createSelector, createStructuredSelector } from 'reselect';
-import { FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
 import FormHorizontal from 'components/FormHorizontal';
+import FormTextGroup from 'components/FormTextGroup';
+import SubmitGroup from 'components/SubmitGroup';
+import FormControlStatic from 'components/FormControlStatic';
+import FormDatepicker from 'components/FormDatepicker';
+import DatePicker from 'react-bootstrap-date-picker';
+import TimePicker from 'react-bootstrap-time-picker';
+
+import { FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
 
 class TestPage extends React.Component {
   handleSubmit(val) {
@@ -19,20 +26,20 @@ class TestPage extends React.Component {
     return (
       <div>
         <Form component={FormHorizontal} model="user" onSubmit={(val) => this.handleSubmit(val)}>
+          <DatePicker />
+          <TimePicker />
           <h1>Hello, {user.get('name')}!</h1>
+          <FormTextGroup label="name" field="name"/>
+          <FormTextGroup label="email" field="email"/>
           <FormGroup>
-            <ControlLabel>name</ControlLabel>
-            <Control model=".name" component={FormControl}/>
-            {/*<Control.text model=".name"/>*/}
+            <Col sm={2}><ControlLabel>Static text</ControlLabel></Col>
+            <Col sm={10}>
+              <Control model={".name"}
+                       component={FormControlStatic}/>
+            </Col>
           </FormGroup>
-          <FormGroup>
-            <ControlLabel>email</ControlLabel>
-            <Control model=".email" component="FormControl"/>
-          </FormGroup>
-          <Control component={Button} type="submit"
-            model="user"
-            disabled={{ valid: false }}
-          >Submit</Control>
+          <FormDatepicker label="startTime" field="startTime"/>
+          <SubmitGroup model="user"/>
         </Form>
       </div>
     );

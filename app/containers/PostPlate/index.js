@@ -1,15 +1,14 @@
-/*
- *
- * PostEditor
- *
- */
+/*...*/
 
 import React from 'react';
 import {connect} from 'react-redux';
-import {Field, Form, Control} from 'react-redux-form/immutable';
+import {Form} from 'react-redux-form/immutable';
 import {createStructuredSelector} from 'reselect';
 import {selectPost} from './selectors';
-import { Form as BootstrapForm, FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
+import FormHorizontal from 'components/FormHorizontal';
+import FormTextGroup from 'components/FormTextGroup';
+import SubmitGroup from 'components/SubmitGroup';
+import Img from 'components/Img';
 
 class PostPlate extends React.Component {
   handleSubmit(post) {
@@ -19,18 +18,22 @@ class PostPlate extends React.Component {
 
   render() {
     let {post} = this.props;
-    console.log("PostPlate.render post: " + JSON.stringify(post));
+    // console.log("PostPlate.render post: " + JSON.stringify(post));
+    console.log("PostPlate.render img: " + (post ? post.originImg : 'Undefined'));
 
     return (
       <div>
-        <Form component={BootstrapForm} model="post.post" onSubmit={(post) => this.handleSubmit(post)}>
-          <FormGroup>
-            <ControlLabel>description</ControlLabel>
-            <Control component={FormControl} model=".en_description"/>
-          </FormGroup>
-          <Control component={Button} type="submit"
-            model="post"
-          >{post.id ? 'Update' : 'Save'}</Control>
+        <Form component={FormHorizontal} model="post.post" onSubmit={(post) => this.handleSubmit(post)}>
+          <FormTextGroup label="id" field="id" static="true"/>
+          <FormTextGroup label="leadId" field="leadId" static="true"/>
+          <FormTextGroup label="status" field="status" static="true"/>
+          <FormTextGroup label="originId" field="originId" static="true"/>
+          <FormTextGroup label="originKind" field="originKind" static="true"/>
+          <FormTextGroup label="description (en)" field="en_description"/>
+          <FormTextGroup label="description (ru)" field="ru_description"/>
+          <FormTextGroup label="originImg" field="originImg"/>
+          <Img src={post.post ? post.post.originImg : 'undefined'} alt="reference image" />
+          <SubmitGroup label={post.id ? 'Update' : 'Save'} model="user" />
         </Form>
       </div>
     );

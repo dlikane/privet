@@ -40,6 +40,7 @@ function routeReducer(state = routeInitialState, action) {
 const initialUser = fromJS({
   name: 'hey there',
   email: '',
+  startTime: new Date(2016, 12, 25, 11, 0)
 });
 
 const initialPostEditor = fromJS({

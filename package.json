@@ -199,6 +199,8 @@
     "mongoose": "4.7.1",
     "react": "15.3.2",
     "react-bootstrap": "^0.30.7",
+    "react-bootstrap-date-picker": "^4.0.0",
+    "react-bootstrap-time-picker": "^1.0.1",
     "react-dom": "15.3.2",
     "react-helmet": "3.1.0",
     "react-intl": "2.1.5",
