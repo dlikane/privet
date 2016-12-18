@@ -11,8 +11,8 @@ export function mapFacebookEventToPost(event) {
     originImg: event.cover.source,
     en_description: event.description,
     ru_description: event.description,
-    startTime: event.start_time,
-    postedTime: Date,
+    startTime: Date.parse(event.start_time),
+    postedTime: Date.now(),
     duration: 0,
     location: event.location,
   };

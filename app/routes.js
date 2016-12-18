@@ -32,13 +32,29 @@ export default function createRoutes(store) {
       name: 'edit',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
+          System.import('containers/PostPlate/sagas'),
+          System.import('containers/PostEditor'),
+        ]);
+        const renderRoute = loadModule(cb);
+        importModules.then(([sagas, component]) => {
+          injectSagas(sagas.default);
+          renderRoute(component);
+        });
+        importModules.catch(errorLoading);
+      },
+    }, {
+    }, {
+      path: '/native',
+      name: 'native',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
           System.import('containers/PostPlate/reducer'),
           System.import('containers/PostPlate/sagas'),
           System.import('containers/PostEditor'),
         ]);
         const renderRoute = loadModule(cb);
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('post', reducer.default);
+          injectReducer('currentPost', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

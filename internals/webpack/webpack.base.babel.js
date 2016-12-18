@@ -44,7 +44,11 @@ module.exports = (options) => ({
     }, {
       test: /\.(mp4|webm)$/,
       loader: 'url-loader?limit=10000',
-    }],
+    }, {
+        test: /\.less$/,
+        loader: "style-loader!css-loader!less-loader"
+     },
+    ]
   },
   plugins: options.plugins.concat([
     new webpack.ProvidePlugin({
@@ -61,6 +65,7 @@ module.exports = (options) => ({
       },
     }),
     new webpack.NamedModulesPlugin(),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /em|ru/),
   ]),
   resolve: {
     modules: ['app', 'node_modules'],

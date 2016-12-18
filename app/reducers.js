@@ -7,7 +7,7 @@ import { combineReducers } from 'redux-immutable';
 import { fromJS } from 'immutable';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import languageProviderReducer from 'containers/LanguageProvider/reducer';
-import { createForms } from 'react-redux-form/immutable';
+import { createForms, modelReducer, combineForms } from 'react-redux-form/immutable';
 
 /*
  * routeReducer
@@ -38,9 +38,11 @@ function routeReducer(state = routeInitialState, action) {
 }
 
 const initialUser = fromJS({
-  name: 'hey there',
-  email: '',
-  startTime: new Date(2016, 12, 25, 11, 0)
+  currentUser: {
+    name: 'hey there',
+    email: '',
+    startTime: new Date(2016, 11, 25, 11, 30),
+  }
 });
 
 const initialPostEditor = fromJS({
@@ -49,7 +51,11 @@ const initialPostEditor = fromJS({
 });
 
 const initialPost = fromJS({
-  en_description: 'test description'
+  error: 'error',
+  loading: false,
+  post: {
+    en_description: 'some description'
+  }
 });
 
 /**
@@ -60,7 +66,7 @@ export default function createReducer(asyncReducers) {
     ...createForms({
       user: initialUser,
       postEditor: initialPostEditor,
-      post: initialPost,
+      currentPost: initialPost,
     }),
     route: routeReducer,
     language: languageProviderReducer,

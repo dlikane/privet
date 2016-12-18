@@ -28,6 +28,7 @@ import { translationMessages } from './i18n';
 import 'sanitize.css/sanitize.css';
 
 import 'css/bootstrap.css';
+import 'react-widgets/lib/less/react-widgets.less';
 
 // Create redux store with history
 // this uses the singleton browserHistory provided by react-router
@@ -52,6 +53,11 @@ const rootRoute = {
   childRoutes: createRoutes(store),
 };
 
+// i18n
+import moment from 'moment';
+moment.locale('en');
+const momentLocalizer = require('react-widgets/lib/localizers/moment');
+momentLocalizer(moment);
 
 const render = (translatedMessages) => {
   ReactDOM.render(

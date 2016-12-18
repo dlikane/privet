@@ -1,8 +1,4 @@
-/*
- *
- * PostEditor
- *
- */
+/*...*/
 
 import React from 'react';
 import {connect} from 'react-redux';
@@ -21,6 +17,7 @@ class PostEditor extends React.Component {
 
   render() {
     let {postEditor} = this.props;
+
     return (
       <div>
         <Form component={BootstrapForm} model="postEditor" onSubmit={(postEditor) => this.handleSubmit(postEditor)}>
@@ -37,7 +34,7 @@ class PostEditor extends React.Component {
             disabled={{valid: false}}
           >Submit</Control>
         </Form>
-        <PostPlate />
+        <PostPlate/>
       </div>
     );
   }

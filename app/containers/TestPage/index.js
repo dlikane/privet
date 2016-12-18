@@ -5,41 +5,27 @@ import { Form, Control } from 'react-redux-form/immutable';
 import { createSelector, createStructuredSelector } from 'reselect';
 import FormHorizontal from 'components/FormHorizontal';
 import FormTextGroup from 'components/FormTextGroup';
-import SubmitGroup from 'components/SubmitGroup';
-import FormControlStatic from 'components/FormControlStatic';
+import FormSubmitGroup from 'components/FormSubmitGroup';
 import FormDatepicker from 'components/FormDatepicker';
-import DatePicker from 'react-bootstrap-date-picker';
-import TimePicker from 'react-bootstrap-time-picker';
-
-import { FormGroup, FormControl, Col, ControlLabel } from 'react-bootstrap';
 
 class TestPage extends React.Component {
   handleSubmit(val) {
     console.log("val: " + JSON.stringify(val));
   }
-
   render() {
     let { user } = this.props;
-    console.log("render.user: " + JSON.stringify(user));
-    console.log("user.name: " + user.get('name'));
+    console.log("render.user props: " + JSON.stringify(this.props));
+    console.log("render.user user: " + JSON.stringify(user));
 
     return (
       <div>
-        <Form component={FormHorizontal} model="user" onSubmit={(val) => this.handleSubmit(val)}>
-          <DatePicker />
-          <TimePicker />
-          <h1>Hello, {user.get('name')}!</h1>
+        <Form component={FormHorizontal} model="user.currentUser" onSubmit={(val) => this.handleSubmit(val)}>
+          <h1>Hello, {user.getIn(['currentUser','name'])}!</h1>
           <FormTextGroup label="name" field="name"/>
           <FormTextGroup label="email" field="email"/>
-          <FormGroup>
-            <Col sm={2}><ControlLabel>Static text</ControlLabel></Col>
-            <Col sm={10}>
-              <Control model={".name"}
-                       component={FormControlStatic}/>
-            </Col>
-          </FormGroup>
+          <FormTextGroup label="static" field="name" static="true"/>
           <FormDatepicker label="startTime" field="startTime"/>
-          <SubmitGroup model="user"/>
+          <FormSubmitGroup model="user"/>
         </Form>
       </div>
     );

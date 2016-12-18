@@ -3,7 +3,7 @@ import React from 'react';
 import { FormGroup, Col, Button } from 'react-bootstrap';
 import { Control } from 'react-redux-form/immutable';
 
-class TextGroup extends React.PureComponent {
+class FormSubmitGroup extends React.PureComponent {
   render() {
     return (
       <FormGroup>
@@ -18,4 +18,4 @@ class TextGroup extends React.PureComponent {
   }
 }
 
-export default TextGroup;
+export default FormSubmitGroup;
