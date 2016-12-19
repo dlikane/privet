@@ -10,9 +10,6 @@ const loadModule = (cb) => (componentModule) => {
 };
 
 export default function createRoutes(store) {
-  // Create reusable async injectors using getAsyncInjectors factory
-  const { injectReducer, injectSagas } = getAsyncInjectors(store); // eslint-disable-line no-unused-vars
-
   return [
     {
       path: '/',
@@ -31,34 +28,9 @@ export default function createRoutes(store) {
       path: '/edit',
       name: 'edit',
       getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/PostPlate/sagas'),
-          System.import('containers/PostEditor'),
-        ]);
-        const renderRoute = loadModule(cb);
-        importModules.then(([sagas, component]) => {
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-        importModules.catch(errorLoading);
-      },
-    }, {
-    }, {
-      path: '/native',
-      name: 'native',
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('containers/PostPlate/reducer'),
-          System.import('containers/PostPlate/sagas'),
-          System.import('containers/PostEditor'),
-        ]);
-        const renderRoute = loadModule(cb);
-        importModules.then(([reducer, sagas, component]) => {
-          injectReducer('currentPost', reducer.default);
-          injectSagas(sagas.default);
-          renderRoute(component);
-        });
-        importModules.catch(errorLoading);
+        System.import('containers/PostEditor')
+          .then(loadModule(cb))
+          .catch(errorLoading);
       },
     }, {
       path: '/test',

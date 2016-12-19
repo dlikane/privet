@@ -45,18 +45,12 @@ const initialUser = fromJS({
   }
 });
 
-const initialPostEditor = fromJS({
+const initialEditor = fromJS({
   originId: '1601001553537687',
   originKind: 'facebook#event',
 });
 
-const initialPost = fromJS({
-  error: 'error',
-  loading: false,
-  post: {
-    en_description: 'some description'
-  }
-});
+const emptyJS = fromJS({});
 
 /**
  * Creates the main reducer with the asynchronously loaded ones
@@ -65,8 +59,10 @@ export default function createReducer(asyncReducers) {
   return combineReducers({
     ...createForms({
       user: initialUser,
-      postEditor: initialPostEditor,
-      currentPost: initialPost,
+      editor: initialEditor,
+      post: emptyJS,
+      loading: emptyJS,
+      error: emptyJS,
     }),
     route: routeReducer,
     language: languageProviderReducer,

@@ -6,10 +6,7 @@ export function getPostFromDbByOriginId(originId) {
   const requestUrl = "http://localhost:3003/api/posts?originId=" + originId;
 
   console.log('try to load post from DB: ' + requestUrl);
-  const post = request(requestUrl);
-
-  console.log('got it: ' + JSON.stringify(post));
-  return post;
+  return request(requestUrl);
 }
 
 

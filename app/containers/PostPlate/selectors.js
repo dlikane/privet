@@ -1,13 +1,18 @@
 import {createSelector} from 'reselect';
 
-const selectPostState = () => (state) => state.get('currentPost');
-
-const selectCurrentPost = () => createSelector(
+const selectPostState = () => (state) => state.get('post');
+const selectPost = () => createSelector(
   selectPostState(),
-  (currentPost) => currentPost
+  (post) => post
 );
 
-export default selectPostState;
+const selectErrorState = () => (state) => state.get('error');
+const selectError = () => createSelector(
+  selectErrorState(),
+  (error) => error
+);
+
 export {
-  selectCurrentPost,
+  selectPost,
+  selectError,
 }

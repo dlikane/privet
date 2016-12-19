@@ -1,8 +1,9 @@
+import { fromJS } from 'immutable';
 import {StatusEnum, OriginKindEnum} from '../model/enums';
 
 export function mapFacebookEventToPost(event) {
-  console.log("Event: " + JSON.stringify(event));
-  return {
+  // console.log("Event: " + JSON.stringify(event));
+  return fromJS({
     leadId: '',
     status: StatusEnum.CREATED,
     originKind: OriginKindEnum.FACEBOOK_EVENT,
@@ -15,5 +16,5 @@ export function mapFacebookEventToPost(event) {
     postedTime: Date.now(),
     duration: 0,
     location: event.location,
-  };
+  });
 }
