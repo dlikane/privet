@@ -37,19 +37,6 @@ function routeReducer(state = routeInitialState, action) {
   }
 }
 
-const initialUser = fromJS({
-  currentUser: {
-    name: 'hey there',
-    email: '',
-    startTime: new Date(2016, 11, 25, 11, 30),
-  }
-});
-
-const initialEditor = fromJS({
-  originId: '1601001553537687',
-  originKind: 'facebook#event',
-});
-
 const emptyJS = fromJS({});
 
 /**
@@ -58,8 +45,8 @@ const emptyJS = fromJS({});
 export default function createReducer(asyncReducers) {
   return combineReducers({
     ...createForms({
-      user: initialUser,
-      editor: initialEditor,
+      editor: emptyJS,
+      batch: emptyJS,
       post: emptyJS,
       loading: emptyJS,
       error: emptyJS,

@@ -1,0 +1,54 @@
+/*...*/
+import {fromJS} from 'immutable';
+import { buildUrl, buildPost } from 'api/mapping/mapping';
+import { getPostFromDbByOriginId } from 'api/clientapi/posts';
+import request from 'utils/request';
+import { actions } from 'react-redux-form';
+
+export function clearPost(dispatch) {
+  dispatch(actions.change('post', fromJS({})));
+}
+
+export function loadingPost(dispatch) {
+  dispatch(actions.change('post', fromJS({loading: 'true'})));
+}
+
+export function loadPost(originId, originKind, dispatch) {
+  loadingPost(dispatch);
+  //
+  // get post from DB
+  getPostFromDbByOriginId(originId)
+    .then((post) => {
+      if (!post || !post.originId) {
+        console.log("not found, load from net");
+        //
+        // if not then get it from FB
+        const requestUrl = buildUrl(originId, originKind);
+        request(requestUrl).then((event) => {
+          post = buildPost(originKind, event);
+          dispatch(actions.change('post', post));
+        });
+      }
+      else {
+        console.log("loaded from DB: " + post.originId + ": " + JSON.stringify(post));
+        dispatch(actions.change('post', fromJS(post)));
+      }
+    })
+    .catch((err) => {
+      console.log("loading from DB failed: " + err);
+      dispatch(actions.change('error', err.message));
+    });
+}
+
+export function parseUrl(val) {
+  if (val && val.match(/facebook/)) {
+    // https://www.facebook.com/events/181087469020083/
+    var regExp = /http(s)?:\/\/(www\.)?facebook.com\/events\/(\d+)($|\/)/;
+    var match = val.match(regExp);
+    if (match) {
+      console.log("id: " + match[3]);
+      val = match[3];
+    }
+  }
+  return val;
+}

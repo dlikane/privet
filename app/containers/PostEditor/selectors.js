@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect';
 
-const selectPostEditorState = () => (state) => state.get('editor');
+const selectEditorState = () => (state) => state.get('editor');
 
-const selectPostEditor = () => createSelector(
-  selectPostEditorState(),
+const selectEditor = () => createSelector(
+  selectEditorState(),
   (editor) => editor
 );
 
-export default selectPostEditorState;
+export default selectEditorState;
 export {
-  selectPostEditor,
+  selectEditor,
 };

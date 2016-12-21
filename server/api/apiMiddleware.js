@@ -1,5 +1,6 @@
 /* eslint-disable global-require */
 const express = require('express');
+const bodyParser = require('body-parser');
 const logger = require('../logger');
 const stringify = require('../utils/stringify');
 const router = express.Router();
@@ -7,6 +8,7 @@ const router = express.Router();
 var Post = require('./model/post');
 
 module.exports = (app, config) => {
+  app.use(bodyParser.json());
   app.use(config.apiPath, router);
   logger.info('register apiMiddleware on: ' + config.apiPath);
 
@@ -14,10 +16,10 @@ module.exports = (app, config) => {
     let originId = req.query.originId;
     if (originId) {
       logger.info('GET /api/posts/ for oringId: ' + originId);
-      return Post.find({originId: originId})
-        .then(posts => {
-          logger.info(JSON.stringify(posts));
-          res.json(posts);
+      return Post.findOne({originId: originId})
+        .then(post => {
+          logger.info(JSON.stringify(post));
+          res.json(post);
         })
         .catch(err => {
           logger.err(err, 'error find any posts');
@@ -28,7 +30,9 @@ module.exports = (app, config) => {
     return Post.find()
       .then(posts => {
         logger.info(JSON.stringify(posts));
-        res.json(posts);
+        if (posts) {
+          res.json(posts);
+        }
       })
       .catch(err => {
         logger.err(err, 'error find any posts');
@@ -51,11 +55,11 @@ module.exports = (app, config) => {
   });
 
   router.post('/posts', function(req, res) {
-    logger.info('POST /api/posts');
+    logger.info('POST /api/posts: req.body: ' + JSON.stringify(req.body));
     let post = new Post(req.body);
     return post.save()
       .then(newPost => {
-        logger.info(newPost);
+        logger.info("new Post: " + newPost);
         res.json(newPost);
       })
       .catch(err => {
@@ -65,12 +69,11 @@ module.exports = (app, config) => {
   });
 
   router.put('/posts/:id', function(req, res) {
-    logger.info('PUT /api/posts/' + req.params.id);
-    let post = new Post(req.body);
-    return post.findByIdAndUpdate(req.params.id)
-      .then(newPost => {
-        logger.info(newPost);
-        res.json(newPost);
+    logger.info('PUT /api/posts/' + req.params.id + ': ' + JSON.stringify(req.body));
+    return Post.findByIdAndUpdate(req.params.id, req.body)
+      .then(post => {
+        logger.info("updated Post: " + post);
+        res.json(post);
       })
       .catch(err => {
         logger.err(err);

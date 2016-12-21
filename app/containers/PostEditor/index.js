@@ -2,11 +2,12 @@
 
 import React from 'react';
 import {connect} from 'react-redux';
-import {fromJS} from 'immutable';
 import {Form} from 'react-redux-form/immutable';
 import {createStructuredSelector} from 'reselect';
-import {selectPostEditor} from './selectors';
+import {selectEditor} from './selectors';
+import {selectPost} from '../PostPlate/selectors';
 import {OriginKindEnum} from '../../model/enums';
+import {fromJS} from 'immutable';
 
 import FormHorizontal from 'components/FormHorizontal';
 import FormTextGroup from 'components/FormTextGroup';
@@ -14,56 +15,49 @@ import FormSelect from 'components/FormSelect';
 import FormSubmitGroup from 'components/FormSubmitGroup';
 import PostPlate from "containers/PostPlate";
 
-import { buildUrl, buildPost } from '../../mapping/mapping';
-import { getPostFromDbByOriginId } from '../../clientapi/posts';
-import request from 'utils/request';
+import { loadPost, parseUrl } from 'services/onboard';
 import { actions } from 'react-redux-form';
 
 class PostEditor extends React.Component {
-  handleSubmit(editor) {
-    const { dispatch } = this.props;
-    const originId = editor.get("originId");
-    const originKind = editor.get("originKind");
+  componentDidMount() {
+    this.props.dispatch(actions.change('editor', fromJS({
+      originId: '1601001553537687',
+      originKind: 'facebook#event'
+    })));
+  }
 
-    dispatch(actions.change('post', fromJS({loading: 'true'})));
-    // get post from DB
-    getPostFromDbByOriginId(originId)
-      .then( (post) => {
-        if (!post || !post.originId) {
-          // if not then get it from FB
-          const requestUrl = buildUrl(originId, originKind);
-          request(requestUrl).then((event) => {
-            post = buildPost(originKind, event);
-            dispatch(actions.change('post', post));
-          });
-        }
-        else {
-          dispatch(actions.change('post', post));
-        }
-      })
-      .catch( (err) => {
-        dispatch(actions.change('error', err.message));
-      });
+  handleSubmit(editor) {
+    console.log("editor: " + JSON.stringify(editor));
+    loadPost(editor.get("originId"), editor.get("originKind"), this.props.dispatch);
   }
 
   render() {
-    let {editor} = this.props;
+    console.log('post: ' + JSON.stringify(this.props.post));
 
-    return (
-      <div>
-        <Form component={FormHorizontal} model="editor" onSubmit={(postEditor) => this.handleSubmit(postEditor)}>
-          <FormTextGroup label="origin ID" field="originId"/>
+    let form = (
+      <PostPlate/>
+    )
+    if (!this.props.post.get('originId')) {
+      form = (
+        <Form component={FormHorizontal} model="editor" onSubmit={(editor) => this.handleSubmit(editor)}>
+          <FormTextGroup label="origin ID" field="originId" parser={parseUrl}/>
           <FormSelect label="origin kind" field="originKind" lookups={OriginKindEnum} />
           <FormSubmitGroup label='Load' model="editor" />
         </Form>
-        <PostPlate/>
+      );
+    }
+
+    return (
+      <div>
+        {form}
       </div>
     );
   }
 }
 
 const mapStateToProps = createStructuredSelector({
-  postEditor: selectPostEditor(),
+  editor: selectEditor(),
+  post: selectPost(),
 });
 
 export default connect(mapStateToProps)(PostEditor);

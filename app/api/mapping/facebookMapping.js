@@ -1,5 +1,5 @@
 import { fromJS } from 'immutable';
-import {StatusEnum, OriginKindEnum} from '../model/enums';
+import {StatusEnum, OriginKindEnum} from 'model/enums';
 
 export function mapFacebookEventToPost(event) {
   // console.log("Event: " + JSON.stringify(event));

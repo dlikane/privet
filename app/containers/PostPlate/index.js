@@ -10,10 +10,18 @@ import FormTextGroup from 'components/FormTextGroup';
 import FormSubmitGroup from 'components/FormSubmitGroup';
 import FormDatepicker from 'components/FormDatepicker';
 import FormImg from 'components/FormImg';
+import { savePost } from 'api/clientapi/posts';
+import { clearPost } from 'services/onboard';
 
 class PostPlate extends React.Component {
   handleSubmit(post) {
-    console.log("Add/Update post: " + JSON.stringify(post));
+    savePost(post);
+    clearPost(this.props.dispatch);
+  }
+
+  onCancel() {
+    console.log('onCancel...');
+    clearPost(this.props.dispatch);
   }
 
   render() {
@@ -27,15 +35,10 @@ class PostPlate extends React.Component {
         <h5>Loading.....</h5>
       );
     }
-    // else if (error) {
-    //   content = (
-    //     <h5>ERROR: {error}</h5>
-    //   );
-    // }
     else if (post.get('status')) {
       content = (
         <Form component={FormHorizontal} model="post" onSubmit={(post) => this.handleSubmit(post)}>
-          <FormTextGroup label="id" field="id" static="true"/>
+          <FormTextGroup label="id" field="_id" static="true"/>
           <FormTextGroup label="leadId" field="leadId" static="true"/>
           <FormTextGroup label="status" field="status" static="true"/>
           <FormTextGroup label="originId" field="originId" static="true"/>
@@ -47,7 +50,7 @@ class PostPlate extends React.Component {
           <FormTextGroup label="duration" field="duration"/>
           <FormTextGroup label="location" field="location"/>
           <FormImg label="originImg" field="originImg"/>
-          <FormSubmitGroup label={post.id ? 'Update' : 'Save'} model="post" />
+          <FormSubmitGroup label={post.get("_id") ? 'Update' : 'Add'} model="post" onCancel={(dispatch) => this.onCancel(dispatch)} />
         </Form>
       );
     }

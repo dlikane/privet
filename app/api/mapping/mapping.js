@@ -1,4 +1,4 @@
-import { OriginKindEnum } from '../model/enums';
+import { OriginKindEnum } from 'model/enums';
 import { mapFacebookEventToPost } from './facebookMapping';
 
 const token = '1126898087427042|6c75ae6050aea3f5ed7ec56365faa649';

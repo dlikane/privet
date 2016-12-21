@@ -11,7 +11,9 @@ class FormTextGroup extends React.PureComponent {
         <Col sm={2}><ControlLabel>{this.props.label}</ControlLabel></Col>
         <Col sm={10}>
           <Control model={"." + this.props.field}
-                              component={this.props.static ? FormControlStatic : FormControl}/>
+                   component={this.props.static ? FormControlStatic : FormControl}
+                   parser={this.props.parser}
+          />
         </Col>
       </FormGroup>
     )
