@@ -26,6 +26,9 @@ class Header extends React.Component { // eslint-disable-line react/prefer-state
           <HeaderLink to="/edit">
             <FormattedMessage {...messages.edit} />
           </HeaderLink>
+          <HeaderLink to="/batch">
+            <FormattedMessage {...messages.batch} />
+          </HeaderLink>
           <HeaderLink to="/test">
             <FormattedMessage {...messages.test} />
           </HeaderLink>

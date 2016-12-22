@@ -14,6 +14,10 @@ export default defineMessages({
     id: 'app.components.Header.edit',
     defaultMessage: 'Edit',
   },
+  batch: {
+    id: 'app.components.Header.batch',
+    defaultMessage: 'Batch',
+  },
   test: {
     id: 'app.components.Header.test',
     defaultMessage: 'Test',

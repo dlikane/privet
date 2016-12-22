@@ -17,26 +17,29 @@ export function loadPost(originId, originKind, dispatch) {
   loadingPost(dispatch);
   //
   // get post from DB
-  getPostFromDbByOriginId(originId)
+  return getPostFromDbByOriginId(originId)
     .then((post) => {
       if (!post || !post.originId) {
-        console.log("not found, load from net");
+        console.log('not found: ' + originId + ', loading from net');
         //
         // if not then get it from FB
         const requestUrl = buildUrl(originId, originKind);
-        request(requestUrl).then((event) => {
+        return request(requestUrl).then((event) => {
           post = buildPost(originKind, event);
           dispatch(actions.change('post', post));
+          return post;
         });
       }
       else {
-        console.log("loaded from DB: " + post.originId + ": " + JSON.stringify(post));
+        console.log("loaded from DB: " + originId );
         dispatch(actions.change('post', fromJS(post)));
+        return fromJS(post);
       }
     })
     .catch((err) => {
       console.log("loading from DB failed: " + err);
       dispatch(actions.change('error', err.message));
+      return null;
     });
 }
 

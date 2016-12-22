@@ -33,6 +33,14 @@ export default function createRoutes(store) {
           .catch(errorLoading);
       },
     }, {
+      path: '/batch',
+      name: 'batch',
+      getComponent(nextState, cb) {
+        System.import('containers/BatchPage')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+      },
+    }, {
       path: '/test',
       name: 'test',
       getComponent(nextState, cb) {

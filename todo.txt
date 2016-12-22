@@ -1,0 +1,4 @@
+
+Temporary:
+- classnames
+- react-addons-shallow-compare

@@ -5,7 +5,6 @@ import { Control } from 'react-redux-form/immutable';
 
 class FormSubmitGroup extends React.PureComponent {
   render() {
-    console.log('are we here....');
     let cancelButton;
     if (this.props.onCancel) {
       cancelButton = (
